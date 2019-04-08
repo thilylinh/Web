@@ -1,9 +1,11 @@
-﻿using TyTyShop.Data.Infrastructure;
+﻿using System;
+using System.Linq.Expressions;
+using TyTyShop.Data.Infrastructure;
 using TyTyShop.Model.Models;
 
 namespace TyTyShop.Data.Reponsitories
 {
-    public interface IPostCategoryRepository
+    public interface IPostCategoryRepository : IReponsitory<Postcategory>
     {
     }
 
@@ -11,6 +13,11 @@ namespace TyTyShop.Data.Reponsitories
     {
         public PostCategoryRepository(IDbFactory dbFactory) : base(dbFactory)
         {
+        }
+
+        public bool CheckContaints(Expression<Func<Postcategory, bool>> preditcate)
+        {
+            throw new NotImplementedException();
         }
     }
 }

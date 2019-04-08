@@ -14,7 +14,7 @@ namespace TyTyShop.Data.Infrastructure
 
         //Marks an entity to be remove
         void Delete(T entity);
-
+        void Delete(int id);
         //delete multi records
         void DeleteMulti(Expression<Func<T, bool>> where);
 
@@ -30,7 +30,7 @@ namespace TyTyShop.Data.Infrastructure
         IQueryable<T> GetMultiPaging(Expression<Func<T, bool>> filter, out int total, int index = 0, int size = 50, string[] includes = null);
 
         int Count(Expression<Func<T, bool>> where);
-
+         
         bool CheckContaints(Expression<Func<T, bool>> preditcate);
     }
 }
