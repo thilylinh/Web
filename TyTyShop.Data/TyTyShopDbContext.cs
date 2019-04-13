@@ -1,9 +1,10 @@
-﻿using System.Data.Entity;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System.Data.Entity;
 using TyTyShop.Model.Models;
 
 namespace TyTyShop.Data
 {
-    public class TyTyShopDbContext : DbContext
+    public class TyTyShopDbContext : IdentityDbContext<ApplicationUser>
     {
         public TyTyShopDbContext() : base("TyTyShopConnection")
         {
@@ -27,10 +28,17 @@ namespace TyTyShop.Data
         public DbSet<SystemConfig> systemConfigs { get; set; }
         public DbSet<Tag> tags { get; set; }
         public DbSet<VisitorStatistic> visitorStatistics { get; set; }
+        public DbSet<Error> Errors { get; set; }
+
+        public static TyTyShopDbContext Create()
+        {
+            return new TyTyShopDbContext();
+        }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<IdentityUserRole>().HasKey(i =>new { i.UserId, i.RoleId });
+            modelBuilder.Entity<IdentityUserLogin>().HasKey(i => i.UserId);
         }
     }
 }
